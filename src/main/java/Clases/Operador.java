@@ -108,35 +108,32 @@ public class Operador extends Usuario {
     @Override
     public void consultarMulta(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Ingrese número del mes: ");
-        int mes = sc.nextInt();
-        System.out.println("----------------------------------------------------------");
-        System.out.println("                    CONSULTAR MULTAS");
-        System.out.println("----------------------------------------------------------");
-        String texto = "";
-        
-        try{ 
-            FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
-            BufferedReader bf = new BufferedReader(fileReader);
-            String temp="";
-            String bfRead;
-            while((bfRead = bf.readLine())!=null){
-                String[] datos = bfRead.split(",");
-                String[] fecha = datos[4].split("-");
-                int m = Integer.parseInt(fecha[1]);
-                if (mes==m) {
-                    System.out.println(bfRead);
-                }
-                temp = temp + bfRead; //guardamos el texto del archivo
-                //System.out.println(bfRead);
+        String condicion = " ";
+        while(condicion.equals(" ")){ 
+            System.out.print("Ingrese número del mes: ");
+            int mes = sc.nextInt(); 
+            try{ 
+                FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
+                BufferedReader bf = new BufferedReader(fileReader);
+                String temp="";
+                String bfRead;
+                while((bfRead = bf.readLine())!=null){
+                    String[] datos = bfRead.split(",");
+                    String[] fecha = datos[4].split("-");
+                    int m = Integer.parseInt(fecha[1]);
+                    if (mes==m) {
+                        System.out.println("----------------------------------------------------------");
+                        System.out.println("                    CONSULTAR MULTAS");
+                        System.out.println("----------------------------------------------------------");
+                        System.out.println(bfRead);
+                        condicion+="FALSE";
+                    }
+                } System.out.println("No se encontraron multas en el mes ingresado");
             }
-            texto = temp;
-            //System.out.println(texto);
-        }
-        catch (IOException e){
-            System.out.println("no se encontro archivo");
-        }
-        
+            catch (IOException e){
+                System.out.println("no se encontro archivo");
+            }
+       }
     }
     
     public void consultarUser(){
