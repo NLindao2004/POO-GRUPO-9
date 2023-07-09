@@ -9,5 +9,6 @@ package Clases;
  * @author PC.1
  */
 public enum TipoPerfil {
-    
+    ESTANDAR,ESTRELLA,OPERADOR;
 }
+
