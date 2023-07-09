@@ -188,5 +188,12 @@ public class Operador extends Usuario {
      return sueldo;   
     }
     
+    public int getSuelgo(){
+        return this.sueldo;
+    }
+    public void setSueldo(int sueldo){
+        this.sueldo=sueldo;
+    }
+    
     
 }

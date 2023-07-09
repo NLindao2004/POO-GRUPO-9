@@ -89,5 +89,8 @@ public abstract class Usuario {
     public void setCedula(String cedula){
         this.cedula=cedula;
     }
-    
+    @Override
+    public String toString(){
+        return "Nombre: "+this.nombre+" Cedula: "+this.cedula+" Edad: "+this.edad+" Perfil: "+this.perfil+" Correo: "+this.correo;
+    }
 }
