@@ -144,7 +144,7 @@ public class Cliente extends Usuario{
             System.out.println();
             String [] fecha = Horarios[numero-1].split(",");
             System.out.println("************************************************************************************");
-            System.out.println(u.setNombre()+", se ha agendado su cita para el "+fecha[0]+" a las "+fecha[1]);
+            System.out.println(u.getNombre()+", se ha agendado su cita para el "+fecha[0]+" a las "+fecha[1]);
             System.out.println("Valor a pagar: "+p.revisionPagoUser(ci));
             System.out.println();
             System.out.println("Puede pagar su cita hasta 24 horas antes de su cita.");

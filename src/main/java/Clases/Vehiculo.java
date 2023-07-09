@@ -33,4 +33,11 @@ public class Vehiculo {
             }
         return null;
     }
+    
+    public String getPlaca(){
+        return this.placa;
+    }
+    public void setPlaca(String placa){
+        this.placa=placa;
+    }
 }

@@ -57,21 +57,37 @@ public abstract class Usuario {
     public abstract void consultarMulta();
     
     
-    public String setNombre(){
+    public String getNombre(){
         return this.nombre;
     }
-    public int setEdad(){
+    public int getEdad(){
         return this.edad;
     }
-    public String setPerfil(){
+    public String getPerfil(){
         return this.perfil;
     }
-    public String setCorreo(){
+    public String getCorreo(){
         return this.correo;
     }
    
-    public String setCedula(){
+    public String getCedula(){
         return this.cedula;
+    }
+    
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+    public void setEdad(int edad){
+        this.edad=edad;
+    }
+    public void setPerfil(String perfil){
+        this.perfil=perfil;
+    }
+    public void setCorreo(String correo){
+        this.correo=correo;
+    }
+    public void setCedula(String cedula){
+        this.cedula=cedula;
     }
     
 }
