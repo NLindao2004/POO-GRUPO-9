@@ -137,8 +137,9 @@ public class Operador extends Usuario {
     @Override
     public void consultarMulta(){
         Scanner sc = new Scanner(System.in);
-        String condicion = " ";
-        while(condicion.equals(" ")){ 
+        System.out.println("----------------------------------------------------------");
+        System.out.println("                    CONSULTAR MULTAS");
+        System.out.println("----------------------------------------------------------");
             System.out.print("Ingrese número del mes: ");
             int mes = sc.nextInt(); 
             try{ 
@@ -151,18 +152,13 @@ public class Operador extends Usuario {
                     String[] fecha = datos[4].split("-");
                     int m = Integer.parseInt(fecha[1]);
                     if (mes==m) {
-                        System.out.println("----------------------------------------------------------");
-                        System.out.println("                    CONSULTAR MULTAS");
-                        System.out.println("----------------------------------------------------------");
                         System.out.println(bfRead);
-                        condicion+="FALSE";
                     }
-                } System.out.println("No se encontraron multas en el mes ingresado");
+                } 
             }
             catch (IOException e){
                 System.out.println("no se encontro archivo");
             }
-       }
     }
    
      /**

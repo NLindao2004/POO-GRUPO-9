@@ -114,7 +114,7 @@ public class Plataforma {
             }//fin de lectura
             catch (IOException e){
             System.out.println("no se encontro archivo");
-            }System.out.println("Usuario o contraseña incorrecta intente nuevamente");
+            }
         }
     }
 }//end class
