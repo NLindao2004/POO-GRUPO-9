@@ -5,9 +5,9 @@
 package Clases;
 
 /**
- *
- * @author PC.1
- */
+
+Enumeración TipoPerfil que representa los diferentes tipos de perfiles disponibles en el sistema.
+*/
 public enum TipoPerfil {
     ESTANDAR,ESTRELLA,OPERADOR;
 }

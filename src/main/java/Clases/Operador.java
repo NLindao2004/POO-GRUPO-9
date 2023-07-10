@@ -11,22 +11,51 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+
+
 /**
- *
- * @author PC.1
+ * Esta clase representa un objeto Operador, que hereda de la clase Usuario.
+ * Un Operador es un tipo de usuario que puede realizar acciones como registrar pagos, consultar multas y consultar usuarios.
  */
 public class Operador extends Usuario {
+    
+    
     private int sueldo;
     
     Scanner sc = new Scanner(System.in);
-    
+
+    /**
+     * Constructor de la clase Operador.
+     * 
+     * @param cedula La cédula del operador.
+     * @param nombre El nombre del operador.
+     * @param edad La edad del operador.
+     * @param correo El correo electrónico del operador.
+     * @param usuario El nombre de usuario del operador.
+     * @param contrasenia La contraseña del operador.
+     * @param perfil El perfil del operador.
+     */
     public Operador(String cedula, String nombre, int edad,String correo, String usuario,String contrasenia, String perfil){
         super(cedula,nombre,edad,correo,usuario,contrasenia,perfil);
     }
     
+     /**
+     * Constructor alternativo de la clase Operador.
+     * Permite buscar y cargar los datos de un operador a partir de su cédula.
+     * 
+     * @param cedula La cédula del operador.
+     */
     public Operador(String cedula){
         super(cedula);
     }
+    
+     /**
+     * Método que registra el pago de multas o revisiones de un usuario.
+     * Permite elegir entre pagar multas o revisiones y registra el pago en el archivo "registroPagos.txt".
+     * 
+     * @param cedula La cédula del usuario.
+     */
     
     public void registrarPago(String cedula){
         
@@ -135,6 +164,11 @@ public class Operador extends Usuario {
             }
        }
     }
+   
+     /**
+     * Método que permite consultar y mostrar los usuarios registrados en el sistema.
+     * Muestra el nombre, perfil y sueldo de los operadores, y el nombre y tipo de los clientes (estrella o estándar).
+     */
     
     public void consultarUser(){
         System.out.println("----------------------------------------------------------");
@@ -168,6 +202,13 @@ public class Operador extends Usuario {
         
     }
     
+    
+/**
+ * Método que busca el sueldo de un operador a partir de su cédula en el archivo "operadores.txt".
+ * 
+ * @param cedula La cédula del operador.
+ * @return El sueldo del operador encontrado.
+ */
     public String buscarSueldo(String cedula){
         String sueldo = " ";
         try{
@@ -187,10 +228,20 @@ public class Operador extends Usuario {
         }
      return sueldo;   
     }
-    
+/**
+ * Método getter que obtiene el sueldo del operador.
+ * 
+ * @return El sueldo del operador.
+ */
     public int getSuelgo(){
         return this.sueldo;
     }
+    
+/**
+ * Método setter que establece el sueldo del operador.
+ * 
+ * @param sueldo El sueldo del operador a establecer.
+ */
     public void setSueldo(int sueldo){
         this.sueldo=sueldo;
     }

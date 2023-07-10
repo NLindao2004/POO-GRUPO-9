@@ -9,12 +9,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- *
- * @author PC.1
- */
+
+Clase Vehiculo que representa un vehículo en el sistema.
+*/
 public class Vehiculo {
     private String placa;
-    
+
+/**
+
+Busca un auto en un archivo basado en su placa.
+@param placa Placa del vehículo a buscar.
+@return Modelo del vehículo encontrado.
+*/
     public String buscarAuto(String placa){
         try{ 
             FileReader file1 = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\vehiculos.txt");
@@ -33,14 +39,28 @@ public class Vehiculo {
             }
         return null;
     }
-    
+
+/**
+
+Obtiene la placa del vehículo.
+@return Placa del vehículo.
+*/
     public String getPlaca(){
         return this.placa;
     }
+/**
+
+Establece la placa del vehículo.
+@param placa Placa del vehículo.
+*/
     public void setPlaca(String placa){
         this.placa=placa;
     }
-    
+/**
+
+Sobrescribe el método toString para retornar una representación en forma de cadena de la placa del vehículo.
+@return Cadena que representa la placa del vehículo.
+*/
     @Override
     public String toString(){
         return this.placa;

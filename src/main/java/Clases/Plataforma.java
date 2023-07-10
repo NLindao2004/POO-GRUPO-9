@@ -17,14 +17,15 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *
- * @author PC.1
+ * Esta clase representa la plataforma del sistema.
+ * Permite validar el usuario e interactuar con el sistema dependiendo del tipo de usuario.
  */
-
 public class Plataforma {
 
     Scanner sc = new Scanner(System.in);
-    
+    /**
+     * Muestra el encabezado del sistema.
+     */
     public void encabezado(){
         System.out.println("***********************************************");
         System.out.println("         BIENVENIDO AL SISTEMA                 ");
@@ -32,6 +33,10 @@ public class Plataforma {
 
     }
     
+    /**
+     * Valida el usuario e inicia sesión en el sistema.
+     * Permite a los operadores y clientes interactuar con el sistema según su rol.
+     */
     public void validarUsuario(){
         String tipo="";
         boolean condicion=true;

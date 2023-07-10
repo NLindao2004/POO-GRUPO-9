@@ -10,12 +10,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- *
- * @author PC.1
- */
+
+Clase Pago que representa un pago realizado en el sistema.
+*/
+
+
 public class Pago {
     Scanner sc = new Scanner(System.in);
-    
+/**
+
+Realiza el pago de las multas asociadas a un usuario.
+
+@param cedula Cédula del usuario.
+
+@return Cadena con los datos del usuario y el formato de pago.
+*/
     public String pagoMultas(String cedula){
         int total = 0;
         String formato= "";
@@ -113,7 +122,15 @@ public class Pago {
         }
         return cedula+","+formato; 
     }
-    
+
+/**
+
+Realiza el pago de una revisión para un usuario.
+
+@param cedula Cédula del usuario.
+
+@return Cadena con los datos del usuario y el formato de pago.
+*/
     public String pagoRevision(String cedula){
         String formato = "";
         try{ 

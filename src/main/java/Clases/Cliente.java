@@ -14,20 +14,45 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- *
- * @author PC.1
+ * La clase Cliente hereda de la clase Usuario y representa a un cliente en el sistema.
  */
 public class Cliente extends Usuario{
+    
+    
+    
+    
     Scanner sc= new Scanner(System.in);
 
-    
+     /**
+     * Constructor de la clase Cliente.
+     * 
+     * @param cedula       La cédula del cliente.
+     * @param nombre       El nombre del cliente.
+     * @param edad         La edad del cliente.
+     * @param correo       El correo electrónico del cliente.
+     * @param usuario      El nombre de usuario del cliente.
+     * @param contrasenia  La contraseña del cliente.
+     * @param perfil       El perfil del cliente.
+     */
     public Cliente(String cedula, String nombre, int edad,String correo, String usuario,String contrasenia, String perfil) {
         super(cedula,nombre,edad,correo,usuario,contrasenia,perfil);
     }
+    /**
+     * Constructor de la clase Cliente que recibe solo la cédula.
+     * 
+     * @param cedula La cédula del cliente.
+     */
     public Cliente(String cedula){
         super(cedula);
     }
     
+    /**
+ * Este método permite al cliente consultar las multas asociadas a su vehículo.
+ * El cliente puede buscar las multas por número de cédula o por placa del vehículo.
+ * Se muestra el detalle de las multas encontradas y el total a pagar.
+ * Además, se proporciona la información sobre cómo pagar las multas.
+ * Si no se encuentran multas, se muestra un mensaje indicando que no hay multas pendientes.
+ */
     @Override 
     public void consultarMulta(){
         String condicion =" ";
@@ -101,6 +126,14 @@ public class Cliente extends Usuario{
         }
     }
     
+    
+    /**
+ * Este método permite al cliente agendar una cita para la revisión de su vehículo.
+ * Se verifica si el vehículo tiene multas pendientes y muestra un mensaje en caso de tenerlas.
+ * En caso contrario, se muestra una lista de horarios disponibles para la revisión y se permite al cliente elegir uno.
+ * Luego de seleccionar el horario, se muestra un mensaje con los detalles de la cita y el valor a pagar por la revisión.
+ * Se genera un número aleatorio para identificar la cita y se guarda en el archivo "revisión.txt" junto con la información de la cita.
+ */
     public void agendarRevision(){
             double total = 0;
             System.out.print("Ingrese la placa: ");
