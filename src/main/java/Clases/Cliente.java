@@ -11,14 +11,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * La clase Cliente hereda de la clase Usuario y representa a un cliente en el sistema.
  */
 public class Cliente extends Usuario{
     
-    
-    
+    private static final Logger logger = Logger.getLogger(Cliente.class.getName());
     
     Scanner sc= new Scanner(System.in);
 
@@ -79,7 +80,7 @@ public class Cliente extends Usuario{
     }
 
     private void consultarMultaPorCedula() {
-        System.out.print("Ingrese el numero de cedula: ");
+        logger.info("Ingrese el numero de cedula: ");
         String cedula = sc.nextLine();
         mostrarEncabezadoMultas();
         double total = buscarMultasPorCriterio(cedula, 0);
@@ -87,7 +88,7 @@ public class Cliente extends Usuario{
     }
 
     private void consultarMultaPorPlaca() {
-        System.out.print("Ingrese la placa: ");
+        logger.info("Ingrese la placa: ");
         String placa = sc.nextLine();
         mostrarEncabezadoMultas();
         double total = buscarMultasPorCriterio(placa, 1);
@@ -95,9 +96,9 @@ public class Cliente extends Usuario{
     }
 
     private void mostrarEncabezadoMultas() {
-        System.out.println("----------------------------------------------------------");
-        System.out.println("                  DETALLE DE MULTAS");
-        System.out.println("----------------------------------------------------------");
+        logger.info("----------------------------------------------------------");
+        logger.info("                  DETALLE DE MULTAS");
+        logger.info("----------------------------------------------------------");
     }
 
     private double buscarMultasPorCriterio(String criterio, int indice) {
@@ -109,23 +110,23 @@ public class Cliente extends Usuario{
             while((bfRead = bf.readLine()) != null){
                 String[] datos = bfRead.split(",");
                 if (datos[indice].equals(criterio)) {
-                    System.out.println(bfRead);
+                    logger.info(bfRead);
                     double valor = Double.parseDouble(datos[3]);
                     total += valor;
                 }  
             }
             bf.close();
         } catch (IOException e){
-            System.out.println("no se encontro archivo");
+            logger.log(Level.SEVERE, "no se encontro archivo", e);
         }
         return total;
     }
 
     private void mostrarTotalYInstrucciones(double total) {
-        System.out.println();
-        System.out.println("TOTAL A PAGAR: " + total);
-        System.out.println();   
-        System.out.println("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
+        logger.info("");
+        logger.info("TOTAL A PAGAR: " + total);
+        logger.info("");   
+        logger.info("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
     }
     
     
