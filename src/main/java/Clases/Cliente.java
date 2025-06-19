@@ -124,7 +124,7 @@ public class Cliente extends Usuario{
 
     private void mostrarTotalYInstrucciones(double total) {
         logger.info("");
-        logger.info("TOTAL A PAGAR: " + total);
+        logger.info(String.format("TOTAL A PAGAR: %.2f", total));
         logger.info("");   
         logger.info("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
     }
@@ -172,7 +172,7 @@ public class Cliente extends Usuario{
             String[] Horarios = {"10-06-2023,09:00" , "10-06-2023,09:30" ,"10-06-2023,10:00" ,"10-06-2023,10:30" ,"10-06-2023,11:00", "......"}; 
             int contador=1;
             for (int i = 0; i < (Horarios.length); i++) {
-                logger.info(contador+"."+" "+Horarios[i]);
+                logger.info(String.format("%d. %s", contador, Horarios[i]));
                 contador+=1;
             }
             logger.info("Elija un horario para la revisión: ");
@@ -180,8 +180,8 @@ public class Cliente extends Usuario{
             logger.info("");
             String [] fecha = Horarios[numero-1].split(",");
             logger.info("************************************************************************************");
-            logger.info(u.getNombre()+", se ha agendado su cita para el "+fecha[0]+" a las "+fecha[1]);
-            logger.info("Valor a pagar: "+p.revisionPagoUser(ci));
+            logger.info(String.format("%s, se ha agendado su cita para el %s a las %s", u.getNombre(), fecha[0], fecha[1]));
+            logger.info(String.format("Valor a pagar: %.2f", p.revisionPagoUser(ci)));
             logger.info("");
             logger.info("Puede pagar su cita hasta 24 horas antes de su cita.");
             logger.info("De lo contrario se la cita se le cancelara.");
