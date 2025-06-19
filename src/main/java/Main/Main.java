@@ -5,7 +5,7 @@
 
 package Main;
 
-import Clases.*;
+import clases.*;
 
 /**
  * Clase principal que inicia la aplicación.
