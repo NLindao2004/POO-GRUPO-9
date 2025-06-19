@@ -55,75 +55,78 @@ public class Cliente extends Usuario{
  */
     @Override 
     public void consultarMulta(){
-        String condicion =" ";
+        String condicion = " ";
         while(condicion.equals(" ")){
-            System.out.println("1. Buscar por cedula");
-            System.out.println("2. Buscar por placa");
-            System.out.print("Ingrese una opcion: ");
-            int opcion= sc.nextInt();
-            sc.nextLine();
-            if (opcion==1){
-                System.out.print("Ingrese el numero de cedula: ");
-                String cedula = sc.nextLine();
-                System.out.println("----------------------------------------------------------");
-                System.out.println("                  DETALLE DE MULTAS");
-                System.out.println("----------------------------------------------------------");
-                try{ 
-                    FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
-                    BufferedReader bf = new BufferedReader(fileReader);
-                    double total=0;
-                    String bfRead;
-                    while((bfRead = bf.readLine())!=null){
-                        String[] datos = bfRead.split(",");
-                        if (datos[0].equals(cedula)) {
-                            System.out.print(bfRead);
-                            double valor = Double.parseDouble(datos[3]);
-                            total+=valor;
-                            System.out.println();
-                        }  
-                    }
-                    System.out.println();
-                    System.out.println("TOTAL A PAGAR: "+total);
-                    System.out.println();   
-                    System.out.println("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
-                }
-                catch (IOException e){
-                    System.out.println("no se encontro archivo");
-                }
-            condicion+="FALSE";
-            }else if (opcion==2) {
-                System.out.print("Ingrese la placa: ");
-                String placa = sc.nextLine();
-                System.out.println("----------------------------------------------------------");
-                System.out.println("                  DETALLE DE MULTAS");
-                System.out.println("----------------------------------------------------------");
-                try{ 
-                FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
-                BufferedReader bf = new BufferedReader(fileReader);
-                double total=0;
-                String bfRead;
-                while((bfRead = bf.readLine())!=null){
-                    String[] datos = bfRead.split(",");
-                    if (datos[1].equals(placa)) {
-                        System.out.print(bfRead);
-                        double valor = Double.parseDouble(datos[3]);
-                        total+=valor;
-                        System.out.println();   
-                    }  
-                }
-                System.out.println();
-                System.out.println("TOTAL A PAGAR: "+total);
-                System.out.println();
-                System.out.println("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
-                }
-                catch (IOException e){
-                    System.out.println("no se encontro archivo");
-                }
-            condicion+="FALSE";    
-            }else{
+            int opcion = mostrarMenuConsulta();
+            if (opcion == 1){
+                consultarMultaPorCedula();
+                condicion += "FALSE";
+            } else if (opcion == 2) {
+                consultarMultaPorPlaca();
+                condicion += "FALSE";    
+            } else {
                 System.out.println("Opción incorrecta");
             }
         }
+    }
+
+    private int mostrarMenuConsulta() {
+        System.out.println("1. Buscar por cedula");
+        System.out.println("2. Buscar por placa");
+        System.out.print("Ingrese una opcion: ");
+        int opcion = sc.nextInt();
+        sc.nextLine();
+        return opcion;
+    }
+
+    private void consultarMultaPorCedula() {
+        System.out.print("Ingrese el numero de cedula: ");
+        String cedula = sc.nextLine();
+        mostrarEncabezadoMultas();
+        double total = buscarMultasPorCriterio(cedula, 0);
+        mostrarTotalYInstrucciones(total);
+    }
+
+    private void consultarMultaPorPlaca() {
+        System.out.print("Ingrese la placa: ");
+        String placa = sc.nextLine();
+        mostrarEncabezadoMultas();
+        double total = buscarMultasPorCriterio(placa, 1);
+        mostrarTotalYInstrucciones(total);
+    }
+
+    private void mostrarEncabezadoMultas() {
+        System.out.println("----------------------------------------------------------");
+        System.out.println("                  DETALLE DE MULTAS");
+        System.out.println("----------------------------------------------------------");
+    }
+
+    private double buscarMultasPorCriterio(String criterio, int indice) {
+        double total = 0;
+        try {
+            FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
+            BufferedReader bf = new BufferedReader(fileReader);
+            String bfRead;
+            while((bfRead = bf.readLine()) != null){
+                String[] datos = bfRead.split(",");
+                if (datos[indice].equals(criterio)) {
+                    System.out.println(bfRead);
+                    double valor = Double.parseDouble(datos[3]);
+                    total += valor;
+                }  
+            }
+            bf.close();
+        } catch (IOException e){
+            System.out.println("no se encontro archivo");
+        }
+        return total;
+    }
+
+    private void mostrarTotalYInstrucciones(double total) {
+        System.out.println();
+        System.out.println("TOTAL A PAGAR: " + total);
+        System.out.println();   
+        System.out.println("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
     }
     
     
