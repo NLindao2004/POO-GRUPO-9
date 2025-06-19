@@ -123,10 +123,12 @@ public class Cliente extends Usuario{
     }
 
     private void mostrarTotalYInstrucciones(double total) {
-        logger.info("");
-        logger.info(String.format("TOTAL A PAGAR: %.2f", total));
-        logger.info("");   
-        logger.info("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("");
+            logger.info(String.format("TOTAL A PAGAR: %.2f", total));
+            logger.info("");   
+            logger.info("PARA PAGAR PUEDE ACERCARCE A LA AGENCIA MAS CERCANA");
+        }
     }
     
     
@@ -163,30 +165,41 @@ public class Cliente extends Usuario{
             Pago p = new Pago();
             
         if (total!=0) {
-            logger.warning("NO PUEDE AGENDAR REVISIÓN TIENE MULTAS PENDIENTES ACERCARCE A LA AGENCIA MAS CERCANA ");
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning("NO PUEDE AGENDAR REVISIÓN TIENE MULTAS PENDIENTES ACERCARCE A LA AGENCIA MAS CERCANA ");
+            }
         }else if (total==0) {
-            logger.info("NO TIENE MULTAS");
-            logger.info("");
-            logger.info("        HORARIOS DISPONIBLES");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("NO TIENE MULTAS");
+                logger.info("");
+                logger.info("        HORARIOS DISPONIBLES");
+            }
             
             String[] Horarios = {"10-06-2023,09:00" , "10-06-2023,09:30" ,"10-06-2023,10:00" ,"10-06-2023,10:30" ,"10-06-2023,11:00", "......"}; 
             int contador=1;
             for (int i = 0; i < (Horarios.length); i++) {
-                logger.info(String.format("%d. %s", contador, Horarios[i]));
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(String.format("%d. %s", contador, Horarios[i]));
+                }
                 contador+=1;
             }
-            logger.info("Elija un horario para la revisión: ");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Elija un horario para la revisión: ");
+            }
             int numero = sc.nextInt();
-            logger.info("");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("");
+            }
             String [] fecha = Horarios[numero-1].split(",");
-            logger.info("************************************************************************************");
-            logger.info(String.format("%s, se ha agendado su cita para el %s a las %s", u.getNombre(), fecha[0], fecha[1]));
-            logger.info(String.format("Valor a pagar: %.2f", p.revisionPagoUser(ci)));
-            logger.info("");
-            logger.info("Puede pagar su cita hasta 24 horas antes de su cita.");
-            logger.info("De lo contrario se la cita se le cancelara.");
-            logger.info("************************************************************************************");
-            
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("************************************************************************************");
+                logger.info(String.format("%s, se ha agendado su cita para el %s a las %s", u.getNombre(), fecha[0], fecha[1]));
+                logger.info(String.format("Valor a pagar: %.2f", p.revisionPagoUser(ci)));
+                logger.info("");
+                logger.info("Puede pagar su cita hasta 24 horas antes de su cita.");
+                logger.info("De lo contrario se la cita se le cancelara.");
+                logger.info("************************************************************************************");
+            }
             
             FileWriter fichero = null;
             BufferedWriter bw = null;
