@@ -65,15 +65,15 @@ public class Cliente extends Usuario{
                 consultarMultaPorPlaca();
                 condicion += "FALSE";    
             } else {
-                System.out.println("Opción incorrecta");
+                logger.warning("Opción incorrecta");
             }
         }
     }
 
     private int mostrarMenuConsulta() {
-        System.out.println("1. Buscar por cedula");
-        System.out.println("2. Buscar por placa");
-        System.out.print("Ingrese una opcion: ");
+        logger.info("1. Buscar por cedula");
+        logger.info("2. Buscar por placa");
+        logger.info("Ingrese una opcion: ");
         int opcion = sc.nextInt();
         sc.nextLine();
         return opcion;
@@ -139,7 +139,7 @@ public class Cliente extends Usuario{
  */
     public void agendarRevision(){
             double total = 0;
-            System.out.print("Ingrese la placa: ");
+            logger.info("Ingrese la placa: ");
             String placa = sc.nextLine();
             try{ 
             FileReader fileReader = new FileReader("C:\\Users\\PC.1\\Desktop\\PROYECTO 1P ENTREGABLE\\multas.txt");
@@ -154,7 +154,7 @@ public class Cliente extends Usuario{
                 }
             }
             catch (IOException e){
-                System.out.println("no se encontro archivo");
+                logger.log(Level.SEVERE, "no se encontro archivo", e);
             }
             
             Vehiculo v = new Vehiculo();
@@ -163,34 +163,33 @@ public class Cliente extends Usuario{
             Pago p = new Pago();
             
         if (total!=0) {
-            System.out.println("NO PUEDE AGENDAR REVISIÓN TIENE MULTAS PENDIENTES ACERCARCE A LA AGENCIA MAS CERCANA ");
+            logger.warning("NO PUEDE AGENDAR REVISIÓN TIENE MULTAS PENDIENTES ACERCARCE A LA AGENCIA MAS CERCANA ");
         }else if (total==0) {
-            System.out.println("NO TIENE MULTAS");
-            System.out.println();
-            System.out.println("        HORARIOS DISPONIBLES");
+            logger.info("NO TIENE MULTAS");
+            logger.info("");
+            logger.info("        HORARIOS DISPONIBLES");
             
             String[] Horarios = {"10-06-2023,09:00" , "10-06-2023,09:30" ,"10-06-2023,10:00" ,"10-06-2023,10:30" ,"10-06-2023,11:00", "......"}; 
             int contador=1;
             for (int i = 0; i < (Horarios.length); i++) {
-                System.out.println(contador+"."+" "+Horarios[i]);
+                logger.info(contador+"."+" "+Horarios[i]);
                 contador+=1;
             }
-            System.out.print("Elija un horario para la revisión: ");
+            logger.info("Elija un horario para la revisión: ");
             int numero = sc.nextInt();
-            System.out.println();
+            logger.info("");
             String [] fecha = Horarios[numero-1].split(",");
-            System.out.println("************************************************************************************");
-            System.out.println(u.getNombre()+", se ha agendado su cita para el "+fecha[0]+" a las "+fecha[1]);
-            System.out.println("Valor a pagar: "+p.revisionPagoUser(ci));
-            System.out.println();
-            System.out.println("Puede pagar su cita hasta 24 horas antes de su cita.");
-            System.out.println("De lo contrario se la cita se le cancelara.");
-            System.out.println("************************************************************************************");
+            logger.info("************************************************************************************");
+            logger.info(u.getNombre()+", se ha agendado su cita para el "+fecha[0]+" a las "+fecha[1]);
+            logger.info("Valor a pagar: "+p.revisionPagoUser(ci));
+            logger.info("");
+            logger.info("Puede pagar su cita hasta 24 horas antes de su cita.");
+            logger.info("De lo contrario se la cita se le cancelara.");
+            logger.info("************************************************************************************");
             
             
             FileWriter fichero = null;
             BufferedWriter bw = null;
-            PrintWriter pw = null;
             int aleatorio = 0;
             aleatorio = (int) (Math.random()*1000);
             try {
@@ -198,7 +197,7 @@ public class Cliente extends Usuario{
                 bw = new BufferedWriter(fichero);
                 bw.write(aleatorio+","+ci+","+placa+","+Horarios[numero-1]+"\n");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Error al escribir archivo de revisión", e);
             } finally {
                 try {
                     // Nuevamente aprovechamos el finally para 
@@ -208,7 +207,7 @@ public class Cliente extends Usuario{
                         bw.close();
                     }
                 } catch (Exception e2) {
-                    e2.printStackTrace();
+                    logger.log(Level.SEVERE, "Error al cerrar archivo", e2);
                 }
             }
         }
